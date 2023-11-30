@@ -853,13 +853,13 @@ static int maybe_modified(git_diff_generated *diff, diff_in_progress *info)
 	const char *matched_pathspec;
 	int error = 0;
 
-	// print matched pathspec
-	printf("matched_pathspec: %s\n", matched_pathspec);
-
 	git_oid_clear(&noid, diff->base.opts.oid_type);
 
 	if (!diff_pathspec_match(&matched_pathspec, diff, oitem))
 		return 0;
+
+	// print matched pathspec
+	printf("matched_pathspec: %s\n", matched_pathspec);
 
 	/* on platforms with no symlinks, preserve mode of existing symlinks */
 	if (S_ISLNK(omode) && S_ISREG(nmode) && new_is_workdir &&
